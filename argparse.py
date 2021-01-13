@@ -13,9 +13,8 @@ def parse_cli() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('pages', nargs='+', type=str, help='pages to edit')
     default_ini = os.environ.get('XDG_CONFIG_HOME', '~/.config') + '/vimoku/vimoku.ini'
+    parser.add_argument('action', choices=ACTIONS, type=str, help='what to do')
     parser.add_argument('--config', '-c', type=str, help='configuration file to use', default=default_ini)
-    parser.add_argument('--message', '-m', type=str, help='version message for the wiki', default=DEFAULT_MESSAGE)
-    parser.add_argument('--editor', '-e', type=str, help='the editor to use', default=None)
     parser.add_argument('--minor', action='store_true', help='whether the modification is minor or not', default=False)
     return parser.parse_args()
 
