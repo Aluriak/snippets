@@ -6,7 +6,7 @@ import argparse
 
 # SIMPLER VERSION:
 
-def parse_cli() -> argparse.ArgumentParser:
+def parse_cli() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('pages', nargs='+', type=str, help='pages to edit')
     default_ini = os.environ.get('XDG_CONFIG_HOME', '~/.config') + '/vimoku/vimoku.ini'
