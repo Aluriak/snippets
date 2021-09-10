@@ -4,9 +4,7 @@ import sys
 import argparse
 
 
-def parse_args(args:iter=None) -> dict:
-    return cli_parser().parse_args(args)
-
+# SIMPLER VERSION:
 
 def parse_cli() -> argparse.Namespace:
     """Simpler version"""
@@ -17,6 +15,15 @@ def parse_cli() -> argparse.Namespace:
     parser.add_argument('--config', '-c', type=str, help='configuration file to use', default=default_ini)
     parser.add_argument('--minor', action='store_true', help='whether the modification is minor or not', default=False)
     return parser.parse_args()
+if __name__ == '__main__':
+    args = parse_cli()
+    print('ARGS:', args)
+
+
+# MORE COMPLETE VERSION:
+
+def parse_args(args:iter=None) -> dict:
+    return cli_parser().parse_args(args)
 
 
 def cli_parser() -> argparse.Namespace:
@@ -88,6 +95,22 @@ def existant_file(filepath:str) -> str:
     if not os.path.exists(filepath):
         raise argparse.ArgumentTypeError("file {} doesn't exists".format(filepath))
     return filepath
+
+
+def readable_file(path:str) -> str:
+    """Argparse type, raising an error if given path is not pointing to a readable file"""
+    if not os.path.isfile(path):
+        raise argparse.ArgumentTypeError(f"No such file: {path}")
+    # all testable files are here
+    return path
+
+
+def readable_dir(path:str) -> str:
+    """Argparse type, raising an error if given path is not pointing to a readable directory"""
+    if not os.path.isdir(path):
+        raise argparse.ArgumentTypeError(f"No such directory: {path}")
+    # all testable files are here
+    return path.rstrip('/') + '/'
 
 
 def writable_file(filepath:str) -> str:
