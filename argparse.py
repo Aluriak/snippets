@@ -8,7 +8,7 @@ def parse_args(args:iter=None) -> dict:
     return cli_parser().parse_args(args)
 
 
-def parse_cli() -> argparse.ArgumentParser:
+def parse_cli() -> argparse.Namespace:
     """Simpler version"""
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('pages', nargs='+', type=str, help='pages to edit')
@@ -19,7 +19,7 @@ def parse_cli() -> argparse.ArgumentParser:
     return parser.parse_args()
 
 
-def cli_parser() -> argparse.ArgumentParser:
+def cli_parser() -> argparse.Namespace:
     """Complex version"""
     # main parser
     parser = argparse.ArgumentParser(description='CLI for PowerGrASP.')
